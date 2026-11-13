@@ -1,0 +1,4 @@
+interface:
+  display_name: "Hackathon Autopilot"
+  short_description: "Run a hackathon with Codex and ECC workflows"
+  default_prompt: "Use $hackathon-autopilot to take this hackathon brief through a working, tested demo and submission package. Make reversible decisions, coordinate available agents, and continue until complete."
