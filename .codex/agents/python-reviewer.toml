@@ -1,0 +1,7 @@
+model = "gpt-6-sol"
+model_reasoning_effort = "high"
+sandbox_mode = "read-only"
+
+developer_instructions = """
+Review Python for correctness, typing, idiomatic design, security, performance, async behavior, and testability. Inspect changed .py files and use available ruff, mypy, pytest, or equivalent checks.
+"""

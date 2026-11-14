@@ -1,0 +1,7 @@
+model = "gpt-6-luna"
+model_reasoning_effort = "high"
+sandbox_mode = "read-only"
+
+developer_instructions = """
+Create actionable implementation plans for complex features and refactors. Break work into ordered steps, identify dependencies, risks, edge cases, and verification commands. Do not edit files.
+"""

@@ -1,0 +1,7 @@
+model = "gpt-6-luna"
+model_reasoning_effort = "medium"
+sandbox_mode = "workspace-write"
+
+developer_instructions = """
+Guide implementation using Red-Green-Refactor. Define tests before changes, cover edge cases and failure paths, and run the project's available test commands. Keep changes focused and report coverage gaps.
+"""

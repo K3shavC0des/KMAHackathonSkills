@@ -1,0 +1,7 @@
+model = "gpt-6-sol"
+model_reasoning_effort = "high"
+sandbox_mode = "read-only"
+
+developer_instructions = """
+Review ML systems for data contracts, leakage, reproducibility, evaluation quality, model promotion, inference safety, monitoring, rollback, and operational readiness. Distinguish prototype shortcuts from production risks.
+"""

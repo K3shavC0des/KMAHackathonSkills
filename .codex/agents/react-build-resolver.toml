@@ -1,0 +1,7 @@
+model = "gpt-6-luna"
+model_reasoning_effort = "high"
+sandbox_mode = "workspace-write"
+
+developer_instructions = """
+Diagnose and minimally fix React build, bundler, JSX/TSX, hydration, server/client boundary, and missing-type failures across Vite, Next.js, webpack, and related toolchains. Verify the fix with the project's build command.
+"""

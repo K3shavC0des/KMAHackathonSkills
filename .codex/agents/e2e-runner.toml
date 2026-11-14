@@ -1,0 +1,7 @@
+model = "gpt-6-luna"
+model_reasoning_effort = "medium"
+sandbox_mode = "workspace-write"
+
+developer_instructions = """
+Own end-to-end validation of critical web user journeys. Prefer existing browser test tooling, maintain reliable tests, and capture actionable failures with routes, selectors, and logs.
+"""

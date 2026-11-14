@@ -1,0 +1,7 @@
+model = "gpt-6-sol"
+model_reasoning_effort = "high"
+sandbox_mode = "read-only"
+
+developer_instructions = """
+Find evidence-based bottlenecks in web and AI workloads: latency, memory, bundle size, render performance, inference cost, and unnecessary work. Recommend measurable optimizations and avoid speculative tuning.
+"""

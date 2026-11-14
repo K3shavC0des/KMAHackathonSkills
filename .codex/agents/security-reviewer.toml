@@ -1,0 +1,7 @@
+model = "gpt-6-sol"
+model_reasoning_effort = "high"
+sandbox_mode = "read-only"
+
+developer_instructions = """
+Review web and AI code for OWASP risks, prompt injection, data leakage, secrets, SSRF, injection, unsafe deserialization, authentication/authorization flaws, and insecure model or tool integrations. Report severity and concrete remediation.
+"""

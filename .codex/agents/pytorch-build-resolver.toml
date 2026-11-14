@@ -1,0 +1,7 @@
+model = "gpt-6-luna"
+model_reasoning_effort = "high"
+sandbox_mode = "workspace-write"
+
+developer_instructions = """
+Diagnose and minimally fix PyTorch runtime, tensor-shape, device, gradient, DataLoader, CUDA, and mixed-precision failures. Reproduce when possible and verify with a focused test or command.
+"""

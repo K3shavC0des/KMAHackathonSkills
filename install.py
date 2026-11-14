@@ -10,6 +10,7 @@ from ecc_setup import setup_ecc
 
 ROOT = Path(__file__).resolve().parent
 SKILLS = ("graphify", "headroom", "claude-mem", "task-observer", "claude-code-setup", "hackathon-autopilot")
+AGENTS = ROOT / ".codex" / "agents"
 
 def digest(path):
     h = hashlib.sha256()
@@ -60,6 +61,27 @@ def main():
             shutil.copytree(src, dst)
             print(f"Installed {name}")
         else: print(f"Would install {name} -> {dst}")
+    agents_target = args.project.resolve() / ".codex" / "agents"
+    if not AGENTS.is_dir():
+        failures.append(f"Bundle incomplete: {AGENTS}")
+    elif args.check:
+        if not agents_target.is_dir() or digest(AGENTS) != digest(agents_target):
+            failures.append(f"Missing or changed: {agents_target}")
+    elif agents_target.is_symlink():
+        failures.append(f"Refusing symbolic link: {agents_target}")
+    elif agents_target.exists() and not agents_target.is_dir():
+        failures.append(f"Not a directory: {agents_target}")
+    elif agents_target.exists() and digest(AGENTS) != digest(agents_target) and not args.force:
+        failures.append(f"Existing edits preserved: {agents_target}; use --force to replace")
+    elif agents_target.is_dir() and digest(AGENTS) == digest(agents_target):
+        print(f"Already present: {agents_target}")
+    elif not args.dry_run:
+        agents_target.parent.mkdir(parents=True, exist_ok=True)
+        if agents_target.exists(): shutil.rmtree(agents_target)
+        shutil.copytree(AGENTS, agents_target)
+        print(f"Installed Codex agents -> {agents_target}")
+    else:
+        print(f"Would install Codex agents -> {agents_target}")
     if args.check and not failures: print(f"Verified {len(SKILLS)} skills in {target}")
     for error in failures: print(error)
     if not failures and not args.skills_only:

@@ -138,7 +138,7 @@ python install.py --project "/path/to/your/hackathon-app"
 python install.py --project "/path/to/your/hackathon-app" --check
 ```
 
-The installer verifies bundled upstream files against their SHA-256 hashes, then copies seven skill folders into the target project's `.agents/skills/`, including Hackathon Autopilot. It preserves an existing folder with different contents and reports it; use `--force` only to intentionally replace that folder. Identical installs can be repeated.
+The installer verifies bundled upstream files against their SHA-256 hashes, then copies seven skill folders into the target project's `.agents/skills/`, including Hackathon Autopilot, plus the bundled ECC-derived Codex agents into `.codex/agents/`. It preserves existing folders with different contents and reports them; use `--force` only to intentionally replace them. Identical installs can be repeated.
 
 It then unpacks the complete, pinned ECC source from `vendor/ecc-source.zip` into this toolkit checkout's ignored `.kma/ecc/<commit>/` directory and registers that directory using upstream's native flow:
 

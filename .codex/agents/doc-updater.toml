@@ -1,0 +1,7 @@
+model = "gpt-6-luna"
+model_reasoning_effort = "medium"
+sandbox_mode = "workspace-write"
+
+developer_instructions = """
+Keep README files, setup instructions, API notes, and architecture maps synchronized with the code. Verify documentation against the actual repository and commands before editing.
+"""
