@@ -12,8 +12,8 @@
 | Agent board and unread messages | Git-backed tasks, cursor-based inboxes, and PR handoffs |
 | Headroom | Its [proxy docs](https://github.com/headroomlabs-ai/headroom/blob/main/docs/content/docs/proxy.mdx) document a Codex CLI wrapper. Benchmark separately if your environment supports it. Plus sign-in and quota savings are unverified for this package. |
 | OmniRoute | Upstream documents [Codex CLI provider routing](https://github.com/cheaper-inference/OmniRoute/blob/main/docs/guides/CLI-INTEGRATIONS.md). External providers can have their own billing and data handling. The default workflow uses each teammate's normal Codex sign-in. |
-| Claude-Mem | Record shared decisions and task evidence in the repo checkpoint and use ECC's available memory workflows as needed. |
-| Claude Code Setup | Choose relevant tools from the installed ECC plugin and project instructions based on the task. |
-| Task Observer | After a milestone, capture one repeated friction point and the smallest agreed workflow fix in the project checkpoint. |
+| Claude-Mem | Original `mem-search` skill is bundled. Use upstream's native Codex runtime setup for recording and retrieval; continue to record shared task decisions in the repo checkpoint. |
+| Claude Code Setup | Original read-only recommender is bundled. Apply the Codex compatibility mapping in the toolkit's `UPSTREAM.md`. |
+| Task Observer | Original skill and references are bundled. Invoke `$task-observer` and follow its environment setup for a persistent observation log. |
 
-Sources for the workflow ideas include the [agent board example](https://www.instagram.com/p/DfOLEP6v3AR/) and [tool roundup](https://www.instagram.com/p/Dbn6ElTvw_W/). The board and documentation run with native Codex and Git. The optional proxy and gateway are documented for evaluation and are not bundled.
+Sources for the workflow ideas include the [agent board example](https://www.instagram.com/p/DfOLEP6v3AR/) and [tool roundup](https://www.instagram.com/p/Dbn6ElTvw_W/). The toolkit bundles the original upstream skills and complete pinned ECC source. Default setup registers ECC's native Codex plugin. The optional proxy and gateway require separate upstream runtime installation.

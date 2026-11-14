@@ -1,79 +1,89 @@
-﻿{
-    "sources":  [
-                    {
-                        "bundle":  "graphify",
-                        "url":  "https://github.com/Graphify-Labs/graphify.git",
-                        "commit":  "52cb28218eea0c68d80a9f4b2ae102d2fa63e267",
-                        "skill_path":  "graphify/skill-codex.md"
-                    },
-                    {
-                        "bundle":  "headroom",
-                        "url":  "https://github.com/headroomlabs-ai/headroom.git",
-                        "commit":  "0368a872cdd5064b39888e13847200ff562ac192",
-                        "skill_path":  "skills/headroom/SKILL.md"
-                    },
-                    {
-                        "bundle":  "claude-mem",
-                        "url":  "https://github.com/thedotmack/claude-mem.git",
-                        "commit":  "0c488b54e761d7f6f4091b3a6e1958712f13b19d",
-                        "skill_path":  "plugin/skills/mem-search/SKILL.md"
-                    },
-                    {
-                        "bundle":  "omniroute",
-                        "url":  "https://github.com/cheaper-inference/OmniRoute.git",
-                        "commit":  "82f60e5ef66cb8f4fd92929a44c3679ef844f84a",
-                        "skill_path":  "skills/config-codex-cli/SKILL.md"
-                    },
-                    {
-                        "bundle":  "task-observer",
-                        "url":  "https://github.com/rebelytics/one-skill-to-rule-them-all.git",
-                        "commit":  "d61bc31f7857948710a947673c0e373bef4ed3d0",
-                        "skill_path":  "SKILL.md"
-                    },
-                    {
-                        "bundle":  "claude-code-setup",
-                        "url":  "https://github.com/anthropics/claude-plugins-official.git",
-                        "commit":  "893173fb82a7184fcf3f08ae55930016d84fd588",
-                        "skill_path":  "plugins/claude-code-setup/skills/claude-automation-recommender/SKILL.md"
-                    }
-                ],
-    "sha256":  {
-                   "vendor/claude-code-setup/LICENSE":  "3ddf9be5c28fe27dad143a5dc76eea25222ad1dd68934a047064e56ed2fa40c5",
-                   "vendor/claude-code-setup/references/hooks-patterns.md":  "6221f7f6d10b99ded96f0bfb06fdf4a52390c12c6686ceff186d2b77a03308ce",
-                   "vendor/claude-code-setup/references/mcp-servers.md":  "02708e0abef64a3f118c8e64744f5c9dbba48c7c526f316e7896d6e837bb5b92",
-                   "vendor/claude-code-setup/references/plugins-reference.md":  "a5058f4f4550b9ca6bce02182f63164502454319d38442d4c624ba4f8d298448",
-                   "vendor/claude-code-setup/references/skills-reference.md":  "45c3d96339966e75d2617068e51a8a8df8dadc6e3dbef8e43c3fca23b7614291",
-                   "vendor/claude-code-setup/references/subagent-templates.md":  "6367e703c0649a173d9c0d769d3da9f8bfa8f68b81fa18c1538f2862a0fdffae",
-                   "vendor/claude-code-setup/SKILL.md":  "f8d4ac5f3460495fca3f81a4284dd9b81f692c5774289d6aaf8e1a200a8f39c2",
-                   "vendor/claude-mem/LICENSE":  "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
-                   "vendor/claude-mem/SKILL.md":  "64e0f27b170fccab790651f8ca3d6d745cddab77e03764c815771bb065ef8748",
-                   "vendor/graphify/LICENSE":  "3ddf9be5c28fe27dad143a5dc76eea25222ad1dd68934a047064e56ed2fa40c5",
-                   "vendor/graphify/LICENSE-MIT":  "3b89cdf398adac954abae52dec007446c50564dbef239e0d48af883d094d2a1b",
-                   "vendor/graphify/NOTICE":  "ff44a7b4dcfad36d547bbcf805e8004910bf68964308968955ee5f1895e3699a",
-                   "vendor/graphify/references/add-watch.md":  "7fd565a4b049c647ca30e736f121becaf97c300887ef0d6418c3f06bdb28649b",
-                   "vendor/graphify/references/exports.md":  "f1debd1003b168c3c1c9fe284bf3018609372740ae8856bea2b10bba0a07b34b",
-                   "vendor/graphify/references/extraction-spec.md":  "77ca4d84004eb4876eca3de1802bd19c0c7efe716b709326fd94f1b37172c7c5",
-                   "vendor/graphify/references/github-and-merge.md":  "1b36d67bd92de0f5ea76ec3b84d1c1103a197c6093b9954995cbaf0abac9fac3",
-                   "vendor/graphify/references/hooks.md":  "0a0d59a5f7582bf93f7afc00319b12166db156b47366e860e6ab6d73e405b29b",
-                   "vendor/graphify/references/query.md":  "f10b5aa8a0621d2ed7e85eb655cdc45ce39fa85e34ff3fddbb211b59ceb03a62",
-                   "vendor/graphify/references/transcribe.md":  "dbdd2b2733734f46c369cfe98322a9a53a77fa56b6728cb2e76f1452a7b71103",
-                   "vendor/graphify/references/update.md":  "582b4c23a1d3e2c0989a0c5dfc2f7c6bf17ad19087aece2c78eb03c0a202bb88",
-                   "vendor/graphify/SKILL.md":  "604adc4448a79b429e56c8e458adb368940c428ceefa72a108b4bcbfbe14aa7d",
-                   "vendor/headroom/LICENSE":  "50b9e890f4afb0a500696cdb6cde3dae08468225a1699317d23e81a1e2703a46",
-                   "vendor/headroom/SKILL.md":  "5713dbdaaa3a3b158f04eb0ccf65649cd668771d149e9e2d4eac9d64537d877f",
-                   "vendor/omniroute/LICENSE":  "ee15249b90d01049db993bc5eb9eaf24a80c1750dc265d01be9a114111893f35",
-                   "vendor/omniroute/SKILL.md":  "39170dd9206e7cf005de0e11717f966e64cd285581ece772c53f554ad3bb7992",
-                   "vendor/task-observer/LICENSE":  "f84fd0e27a619fa5ad1e40665af6700b8c75fd46758b942abdd8f806bc2d0b91",
-                   "vendor/task-observer/references/ceilings.txt":  "e1ce67c65a27cbaad7f4a5e67a0acb84733bd5c2551d082fa652b9cbe3ff27e1",
-                   "vendor/task-observer/references/environments.md":  "7b46bfc733a63ab90bf571478df9d77d8d603329c53bba6974ee3dd8de285c70",
-                   "vendor/task-observer/references/migration.md":  "f1eeeb456349934bcb060fadb2be8041e4144ab34635654605cb03390c732cf0",
-                   "vendor/task-observer/references/observation-families.md":  "ce6f29a8056dca611dfdc7cb4ea609d5264b804d4bdbe7e33410a8d8995900bd",
-                   "vendor/task-observer/references/observation-log.md":  "5f6b6ca9493003a502480ba6569769f41e76027caa498cb06e17814d0a5df156",
-                   "vendor/task-observer/references/observation-scan.md":  "22edc42e393bb31aa916f6d5d579700807f049e3f717acd7197927cc0baaa396",
-                   "vendor/task-observer/references/signals.md":  "0ee6ae5863ebe6ccd8758f2d3808384c0e10df6247b1bd0b65d3128f4184f6d0",
-                   "vendor/task-observer/references/skill-authoring.md":  "eae9e258cf59d09f4ddc723135b45f2069ebd1bbd3b5786a5e1eef65df97591b",
-                   "vendor/task-observer/references/starter-principles.md":  "0897772062bfd6864eb4cefde72f1e8209a929d6fe27f62cc0a0929db5f4becc",
-                   "vendor/task-observer/references/weekly-review.md":  "5025300b2b5dbe25659ec14eb66a961e834fc27ba3beccf4e4ac5cf19c24d8e5",
-                   "vendor/task-observer/SKILL.md":  "1ea11f366b2666bf93550317806b4695ff8d116d10fa3920cc880da4f3a94781"
-               }
+{
+  "sources": [
+    {
+      "bundle": "graphify",
+      "url": "https://github.com/Graphify-Labs/graphify.git",
+      "commit": "52cb28218eea0c68d80a9f4b2ae102d2fa63e267",
+      "skill_path": "graphify/skill-codex.md"
+    },
+    {
+      "bundle": "headroom",
+      "url": "https://github.com/headroomlabs-ai/headroom.git",
+      "commit": "0368a872cdd5064b39888e13847200ff562ac192",
+      "skill_path": "skills/headroom/SKILL.md"
+    },
+    {
+      "bundle": "claude-mem",
+      "url": "https://github.com/thedotmack/claude-mem.git",
+      "commit": "0c488b54e761d7f6f4091b3a6e1958712f13b19d",
+      "skill_path": "plugin/skills/mem-search/SKILL.md"
+    },
+    {
+      "bundle": "omniroute",
+      "url": "https://github.com/cheaper-inference/OmniRoute.git",
+      "commit": "82f60e5ef66cb8f4fd92929a44c3679ef844f84a",
+      "skill_path": "skills/config-codex-cli/SKILL.md"
+    },
+    {
+      "bundle": "task-observer",
+      "url": "https://github.com/rebelytics/one-skill-to-rule-them-all.git",
+      "commit": "d61bc31f7857948710a947673c0e373bef4ed3d0",
+      "skill_path": "SKILL.md"
+    },
+    {
+      "bundle": "claude-code-setup",
+      "url": "https://github.com/anthropics/claude-plugins-official.git",
+      "commit": "893173fb82a7184fcf3f08ae55930016d84fd588",
+      "skill_path": "plugins/claude-code-setup/skills/claude-automation-recommender/SKILL.md"
+    },
+    {
+      "bundle": "ecc",
+      "url": "https://github.com/affaan-m/ECC.git",
+      "commit": "d2ef2680594f9a17526a6e1a2e18b3d242c5d17b",
+      "version": "2.2.3",
+      "archive": "vendor/ecc-source.zip",
+      "format": "git archive --format=zip -9 HEAD"
+    }
+  ],
+  "sha256": {
+    "vendor/claude-code-setup/LICENSE": "3ddf9be5c28fe27dad143a5dc76eea25222ad1dd68934a047064e56ed2fa40c5",
+    "vendor/claude-code-setup/references/hooks-patterns.md": "6221f7f6d10b99ded96f0bfb06fdf4a52390c12c6686ceff186d2b77a03308ce",
+    "vendor/claude-code-setup/references/mcp-servers.md": "02708e0abef64a3f118c8e64744f5c9dbba48c7c526f316e7896d6e837bb5b92",
+    "vendor/claude-code-setup/references/plugins-reference.md": "a5058f4f4550b9ca6bce02182f63164502454319d38442d4c624ba4f8d298448",
+    "vendor/claude-code-setup/references/skills-reference.md": "45c3d96339966e75d2617068e51a8a8df8dadc6e3dbef8e43c3fca23b7614291",
+    "vendor/claude-code-setup/references/subagent-templates.md": "6367e703c0649a173d9c0d769d3da9f8bfa8f68b81fa18c1538f2862a0fdffae",
+    "vendor/claude-code-setup/SKILL.md": "f8d4ac5f3460495fca3f81a4284dd9b81f692c5774289d6aaf8e1a200a8f39c2",
+    "vendor/claude-mem/LICENSE": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+    "vendor/claude-mem/SKILL.md": "64e0f27b170fccab790651f8ca3d6d745cddab77e03764c815771bb065ef8748",
+    "vendor/graphify/LICENSE": "3ddf9be5c28fe27dad143a5dc76eea25222ad1dd68934a047064e56ed2fa40c5",
+    "vendor/graphify/LICENSE-MIT": "3b89cdf398adac954abae52dec007446c50564dbef239e0d48af883d094d2a1b",
+    "vendor/graphify/NOTICE": "ff44a7b4dcfad36d547bbcf805e8004910bf68964308968955ee5f1895e3699a",
+    "vendor/graphify/references/add-watch.md": "7fd565a4b049c647ca30e736f121becaf97c300887ef0d6418c3f06bdb28649b",
+    "vendor/graphify/references/exports.md": "f1debd1003b168c3c1c9fe284bf3018609372740ae8856bea2b10bba0a07b34b",
+    "vendor/graphify/references/extraction-spec.md": "77ca4d84004eb4876eca3de1802bd19c0c7efe716b709326fd94f1b37172c7c5",
+    "vendor/graphify/references/github-and-merge.md": "1b36d67bd92de0f5ea76ec3b84d1c1103a197c6093b9954995cbaf0abac9fac3",
+    "vendor/graphify/references/hooks.md": "0a0d59a5f7582bf93f7afc00319b12166db156b47366e860e6ab6d73e405b29b",
+    "vendor/graphify/references/query.md": "f10b5aa8a0621d2ed7e85eb655cdc45ce39fa85e34ff3fddbb211b59ceb03a62",
+    "vendor/graphify/references/transcribe.md": "dbdd2b2733734f46c369cfe98322a9a53a77fa56b6728cb2e76f1452a7b71103",
+    "vendor/graphify/references/update.md": "582b4c23a1d3e2c0989a0c5dfc2f7c6bf17ad19087aece2c78eb03c0a202bb88",
+    "vendor/graphify/SKILL.md": "604adc4448a79b429e56c8e458adb368940c428ceefa72a108b4bcbfbe14aa7d",
+    "vendor/headroom/LICENSE": "50b9e890f4afb0a500696cdb6cde3dae08468225a1699317d23e81a1e2703a46",
+    "vendor/headroom/SKILL.md": "5713dbdaaa3a3b158f04eb0ccf65649cd668771d149e9e2d4eac9d64537d877f",
+    "vendor/omniroute/LICENSE": "ee15249b90d01049db993bc5eb9eaf24a80c1750dc265d01be9a114111893f35",
+    "vendor/omniroute/SKILL.md": "39170dd9206e7cf005de0e11717f966e64cd285581ece772c53f554ad3bb7992",
+    "vendor/task-observer/LICENSE": "f84fd0e27a619fa5ad1e40665af6700b8c75fd46758b942abdd8f806bc2d0b91",
+    "vendor/task-observer/references/ceilings.txt": "e1ce67c65a27cbaad7f4a5e67a0acb84733bd5c2551d082fa652b9cbe3ff27e1",
+    "vendor/task-observer/references/environments.md": "7b46bfc733a63ab90bf571478df9d77d8d603329c53bba6974ee3dd8de285c70",
+    "vendor/task-observer/references/migration.md": "f1eeeb456349934bcb060fadb2be8041e4144ab34635654605cb03390c732cf0",
+    "vendor/task-observer/references/observation-families.md": "ce6f29a8056dca611dfdc7cb4ea609d5264b804d4bdbe7e33410a8d8995900bd",
+    "vendor/task-observer/references/observation-log.md": "5f6b6ca9493003a502480ba6569769f41e76027caa498cb06e17814d0a5df156",
+    "vendor/task-observer/references/observation-scan.md": "22edc42e393bb31aa916f6d5d579700807f049e3f717acd7197927cc0baaa396",
+    "vendor/task-observer/references/signals.md": "0ee6ae5863ebe6ccd8758f2d3808384c0e10df6247b1bd0b65d3128f4184f6d0",
+    "vendor/task-observer/references/skill-authoring.md": "eae9e258cf59d09f4ddc723135b45f2069ebd1bbd3b5786a5e1eef65df97591b",
+    "vendor/task-observer/references/starter-principles.md": "0897772062bfd6864eb4cefde72f1e8209a929d6fe27f62cc0a0929db5f4becc",
+    "vendor/task-observer/references/weekly-review.md": "5025300b2b5dbe25659ec14eb66a961e834fc27ba3beccf4e4ac5cf19c24d8e5",
+    "vendor/task-observer/SKILL.md": "1ea11f366b2666bf93550317806b4695ff8d116d10fa3920cc880da4f3a94781",
+    "vendor/ecc-source.zip": "df371318ceb749a4db172c8bde7e4b07ee1715d19bd57dd152ec656bcd24b426",
+    "vendor/ECC-LICENSE": "326146379f01bb137c0a5d3c54770c1aa31076705c8b88a7f6b26a460f6221b2"
+  }
 }

@@ -2,13 +2,14 @@
 
 A shared toolkit for building a hackathon entry with Codex: a hackathon coordinator, a Git based team board, and original upstream skills for understanding code, compressing context, remembering work, routing models, and improving workflows.
 
-**Start here:** install the skills in your hackathon app repository, open that project in Codex, and use `$hackathon-autopilot`. The installer copies skill instructions and reference files. External tools have separate runtime setup described below.
+**Start here:** run the installer for your hackathon app repository, restart Codex, and use `$hackathon-autopilot`. Setup copies the project skills and installs ECC through its native Codex plugin interface. The other external tools have separate runtime setup described below.
 
 ## What is included
 
 | Component | What it does | What is bundled |
 | --- | --- | --- |
 | **Hackathon Autopilot** | Turns a challenge, deadline, and rubric into tasks; maintains project state; coordinates teammates; guides implementation, verification, demo rehearsal, and submission preparation. | The coordinator skill, guides, and optional Node.js team board. Uses [ECC](https://github.com/affaan-m/ECC/tree/main/.codex-plugin) workflows when installed. |
+| **ECC** | Supplies reusable workflows for planning, architecture, TDD, security, code review, verification, and more. | Complete upstream source exported at commit `d2ef2680594f9a17526a6e1a2e18b3d242c5d17b`, version **2.2.3**, with its MIT license. The installer registers its original native Codex plugin, including skills, hook scripts, MCP configuration, and assets. |
 | **Graphify** | Builds knowledge graphs of code and documents to investigate architecture, relationships, and paths through a project. | Upstream's Codex specific skill and references. Graph generation requires the Graphify runtime. |
 | **Headroom** | Compresses large tool results, logs, and other LLM context. Its CLI can wrap Codex through a local proxy. | Upstream's library integration skill. Installing this skill alone does not wrap Codex. |
 | **Claude-Mem** | Records work across sessions and retrieves relevant memory. Its observer uses a configured AI provider. | Upstream's `mem-search` skill. Recording, the local worker, and Codex integration require its upstream installer. |
@@ -20,7 +21,7 @@ These are upstream skill snapshots, with their licenses retained. No replacement
 
 ## Teammate installation
 
-You need Git, Python 3.10 or newer, and a Codex client that supports project skills. On Windows, use `py` if that is your Python command; on macOS/Linux, use `python3` when needed.
+You need Git, Python 3.10 or newer, and the **Codex CLI with native plugin support** (ECC documents Codex 0.146.0 or newer; this setup was checked with 0.169.0). Node.js is needed to run ECC's hook commands; Node.js 22+ also supports the optional team board. On Windows, use `py` if that is your Python command; on macOS/Linux, use `python3` when needed.
 
 ```sh
 git clone https://github.com/K3shavC0des/KMAHackathonSkills.git
@@ -30,11 +31,33 @@ python install.py --project "/path/to/your/hackathon-app"
 python install.py --project "/path/to/your/hackathon-app" --check
 ```
 
-The installer verifies bundled upstream files against their SHA-256 hashes, then copies seven skill folders into the target project's `.agents/skills/`, including Hackathon Autopilot. It preserves an existing folder with different contents and reports it; use `--force` only to intentionally replace that folder. Identical installs can be repeated. `--check` verifies installed files and returns a nonzero exit code for missing or changed content.
+The installer verifies bundled upstream files against their SHA-256 hashes, then copies seven skill folders into the target project's `.agents/skills/`, including Hackathon Autopilot. It preserves an existing folder with different contents and reports it; use `--force` only to intentionally replace that folder. Identical installs can be repeated.
+
+It then unpacks the complete, pinned ECC source from `vendor/ecc-source.zip` into this toolkit checkout's ignored `.kma/ecc/<commit>/` directory and registers that directory using upstream's native flow:
+
+```text
+codex plugin marketplace add <absolute-path-to-extracted-ECC>
+codex plugin add ecc@ecc
+```
+
+ECC is installed into the active Codex home, so each teammate runs setup once for their own Codex environment. Keep this toolkit checkout available as the local marketplace source. ECC's enabled state applies to sessions using that Codex home; it is not limited to the target app. `--check` verifies project skills, confirms the pinned ECC plugin is enabled, and compares every exported ECC file in its cache against the bundled archive.
+
+Useful options:
+
+| Option | Purpose |
+| --- | --- |
+| `--skills-only` | Copy or check the seven project skills without registering or checking ECC. The ECC source remains bundled. |
+| `--codex "/path/to/codex"` | Use a Codex CLI executable that is not on PATH. |
+| `--codex-home "/path/to/home"` | Install/check in an explicit Codex home; useful for an isolated verification. Otherwise setup respects `CODEX_HOME` or the CLI default. |
+| `--dry-run` | Show the planned copies and ECC registration without writing files or running Codex. |
+
+If an existing `ecc` marketplace points to another source, setup reports the mismatch rather than replacing that registration. Inspect it with `codex plugin marketplace list --json`. To intentionally switch to this bundle, run `codex plugin marketplace remove ecc` in the same Codex home and rerun setup. `--force` applies only to project skill copies.
 
 Commit the installed folders in the **app repository** so teammates receive the same snapshots. Open or restart Codex in that app project. If discovery is unavailable in your client, explicitly ask it to read the relevant `SKILL.md`.
 
-The script does not install Python packages, npm programs, user configuration, services, credentials, or ECC. Skills are instructions for the agent; their underlying programs need the setup below.
+ECC registration updates Codex's plugin configuration and cache through its own CLI. Setup does not install npm/Python dependencies, services, or credentials. Skills are instructions for the agent; the other tools need the runtime setup below.
+
+After setup, restart Codex, open `/hooks`, and review and trust ECC's hook definition before enabling it. Then select `$configure-ecc` for upstream's guided configuration. Native plugin registration does not automatically trust hooks. ECC also includes a Chrome DevTools MCP configuration; invoking it can download its pinned npm package.
 
 ## Install the original tool runtimes
 
@@ -50,7 +73,7 @@ These commands pin the top level versions captured with this bundle. Dependencie
 
 Claude-Mem can retain session information and consume additional provider tokens. OmniRoute sends requests to providers you connect. Headroom changes the request path while wrapping Codex. Inspect upstream setup before combining proxies. The skill installation check does not exercise live provider calls or memory recording.
 
-Install ECC separately using its [native Codex plugin instructions](https://github.com/affaan-m/ECC/tree/main/.codex-plugin). Autopilot uses workflows available in the host and records missing capabilities. The optional team board requires Node.js 22+ and Git; posting updates requires push access to the app repository.
+ECC is already bundled and registered by the default installer. Its [included native setup guide](https://github.com/affaan-m/ECC/blob/d2ef2680594f9a17526a6e1a2e18b3d242c5d17b/.codex-plugin/README.md) explains hook runtime dependencies and cache recovery. Native registration does not run `npm ci`. If a hook reports a missing package, follow that guide for an explicit cache-local dependency install; rerun its cache checker against the actual active plugin directory. Autopilot uses workflows available in the host and records missing capabilities. Posting team board updates requires push access to the app repository.
 
 ## Start a hackathon session
 
@@ -89,13 +112,28 @@ See [UPSTREAM.md](UPSTREAM.md) for compatibility notes. The original recommender
 ```text
 .agents/skills/hackathon-autopilot/  Coordinator and team board
 vendor/                            Original skills, references, licenses
-install.py                         Project installer and installed-file check
+vendor/ecc-source.zip               Complete pinned ECC source export (~39 MB)
+vendor/ECC-LICENSE                  ECC's MIT license, also inside the archive
+install.py + ecc_setup.py           Skill installation and native ECC setup/check
 upstream-lock.json                 Source commits and bundled SHA-256 hashes
 UPSTREAM.md                        Sources and compatibility notes
 ```
 
-To update a snapshot, retrieve the intended upstream revision, replace its bundled files and license notices, update provenance and hashes, then check a fresh install before committing. Preserve original vendor text and keep Codex specific guidance explicit.
+To update a snapshot, retrieve the intended upstream revision, replace its bundled files and license notices, update provenance and hashes, then check a fresh install before committing. For ECC, create a fresh `git archive --format=zip -9` export of the selected commit and update its commit, version, and archive hash in `upstream-lock.json`. Preserve original vendor text and keep Codex specific guidance explicit.
 
 To remove an installed skill, delete its folder under the app's `.agents/skills/`. Removing skills does not stop separately installed runtimes or erase their databases and configuration; use upstream uninstall instructions for those.
 
-Attribution belongs to the maintainers and contributors linked in [UPSTREAM.md](UPSTREAM.md), including Eoghan Henn and contributors for Task Observer (CC BY 4.0), Anthropic for Claude Code Setup, and Affaan Mustafa and contributors for ECC. Each bundled upstream directory carries its own license.
+To disable or remove ECC, use Codex's `/plugins` controls and inspect its marketplace registration before removing it. Once it is no longer used as a marketplace source, the extracted `.kma/ecc/` copy can be deleted. Updating the toolkit's Git checkout does not silently upgrade ECC in Codex; rerun setup to install and check the bundled version.
+
+Attribution belongs to the maintainers and contributors linked in [UPSTREAM.md](UPSTREAM.md), including Eoghan Henn and contributors for Task Observer (CC BY 4.0), Anthropic for Claude Code Setup, and Affaan Mustafa and contributors for ECC ([MIT license](vendor/ECC-LICENSE), also retained inside the archive). Each bundled upstream skill directory carries its own license.
+
+## Verification
+
+Packaging and native ECC registration were checked on Windows with Python 3.12 and Codex CLI 0.169.0, using a separate app folder and isolated Codex home. To reproduce without touching your normal Codex home:
+
+```sh
+python install.py --project "/tmp/kma-test-app" --codex-home "/tmp/kma-test-codex-home"
+python install.py --project "/tmp/kma-test-app" --codex-home "/tmp/kma-test-codex-home" --check
+```
+
+Use suitable absolute paths on Windows and `--codex` if the CLI is not on PATH. The check covers skill contents, the enabled ECC registration, and every archived file in the plugin cache. Live hooks, MCP servers, model requests, and a complete hackathon were not exercised by this packaging check.

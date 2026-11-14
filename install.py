@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
-"""Install the bundled upstream Agent Skills into a Codex project."""
+"""Install project Agent Skills and the bundled native ECC plugin for Codex."""
 import argparse
 import hashlib
 import json
 import shutil
+import subprocess
 from pathlib import Path
+from ecc_setup import setup_ecc
 
 ROOT = Path(__file__).resolve().parent
 SKILLS = ("graphify", "headroom", "claude-mem", "omniroute", "task-observer", "claude-code-setup", "hackathon-autopilot")
@@ -19,9 +21,12 @@ def digest(path):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--project", type=Path, default=Path.cwd(), help="Codex project root")
-    ap.add_argument("--check", action="store_true", help="verify installed skills match this bundle")
+    ap.add_argument("--check", action="store_true", help="verify installed skills and the pinned ECC plugin")
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--force", action="store_true", help="replace installed skills that differ")
+    ap.add_argument("--skills-only", action="store_true", help="copy project skills without registering ECC")
+    ap.add_argument("--codex", default="codex", help="Codex CLI executable (default: codex)")
+    ap.add_argument("--codex-home", type=Path, help="explicit Codex home, for example an isolated test directory")
     args = ap.parse_args()
     lock = json.loads((ROOT / "upstream-lock.json").read_text(encoding="utf-8-sig"))
     for relative, expected in lock["sha256"].items():
@@ -47,6 +52,8 @@ def main():
             failures.append(f"Existing edits preserved: {dst}; use --force to replace")
         elif src.resolve() == dst.resolve():
             print(f"Already present: {name}")
+        elif dst.is_dir() and digest(src) == digest(dst):
+            print(f"Already present: {name}")
         elif not args.dry_run:
             dst.parent.mkdir(parents=True, exist_ok=True)
             if dst.exists(): shutil.rmtree(dst)
@@ -55,6 +62,15 @@ def main():
         else: print(f"Would install {name} -> {dst}")
     if args.check and not failures: print(f"Verified {len(SKILLS)} skills in {target}")
     for error in failures: print(error)
+    if not failures and not args.skills_only:
+        setup_ecc(ROOT, lock, args)
     return bool(failures)
 
-if __name__ == "__main__": raise SystemExit(main())
+if __name__ == "__main__":
+    try:
+        raise SystemExit(main())
+    except (OSError, ValueError, subprocess.CalledProcessError) as error:
+        print(f"Setup failed: {error}")
+        if isinstance(error, subprocess.CalledProcessError) and error.stderr:
+            print(error.stderr.strip())
+        raise SystemExit(1)
