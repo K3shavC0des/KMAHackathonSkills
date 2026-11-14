@@ -63,7 +63,7 @@ Request the host's filesystem permission when the destination requires it.
    Substitute real absolute paths and the Python runner established above.
    Quote paths for the detected shell. Check each exit status and fix failures
    before continuing. Use the default setup so it registers the bundled native
-   ECC plugin and copies the seven project skills. Preserve edited installed
+   ECC plugin and copies the six project skills. Preserve edited installed
    skills and inspect differences before choosing an update. If an existing ECC
    marketplace points elsewhere, inspect it and explain any necessary source
    replacement before asking me to approve changes to that existing setup.
@@ -138,7 +138,7 @@ python install.py --project "/path/to/your/hackathon-app"
 python install.py --project "/path/to/your/hackathon-app" --check
 ```
 
-The installer verifies bundled upstream files against their SHA-256 hashes, then copies seven skill folders into the target project's `.agents/skills/`, including Hackathon Autopilot, plus the bundled ECC-derived Codex agents into `.codex/agents/`. It preserves existing folders with different contents and reports them; use `--force` only to intentionally replace them. Identical installs can be repeated.
+The installer verifies bundled upstream files against their SHA-256 hashes, then copies six skill folders into the target project's `.agents/skills/`, including Hackathon Autopilot, plus the bundled ECC-derived Codex agents into `.codex/agents/`. It also copies the Windows runtime helpers from `runtime/`. It preserves existing files with different contents and reports them; use `--force` only to intentionally replace them. Identical installs can be repeated. Agent comparison tolerates Windows CRLF line endings.
 
 It then unpacks the complete, pinned ECC source from `vendor/ecc-source.zip` into this toolkit checkout's ignored `.kma/ecc/<commit>/` directory and registers that directory using upstream's native flow:
 
@@ -153,7 +153,7 @@ Useful options:
 
 | Option | Purpose |
 | --- | --- |
-| `--skills-only` | Copy or check the seven project skills without registering or checking ECC. The ECC source remains bundled. |
+| `--skills-only` | Copy or check the six project skills, agents and runtime helpers without registering or checking ECC. The ECC source remains bundled. |
 | `--codex "/path/to/codex"` | Use a Codex CLI executable that is not on PATH. |
 | `--codex-home "/path/to/home"` | Install/check in an explicit Codex home; useful for an isolated verification. Otherwise setup respects `CODEX_HOME` or the CLI default. |
 | `--dry-run` | Show the planned copies and ECC registration without writing files or running Codex. |
@@ -167,6 +167,19 @@ ECC registration updates Codex's plugin configuration and cache through its own 
 After setup, restart Codex, open `/hooks`, and review and trust ECC's hook definition before enabling it. Then select `$configure-ecc` for upstream's guided configuration. Native plugin registration does not automatically trust hooks. ECC also includes a Chrome DevTools MCP configuration; invoking it can download its pinned npm package.
 
 ## Install the original tool runtimes
+
+After installing the toolkit, change to the app repository and run:
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/setup-aux-skills.ps1
+.\scripts\memory.ps1 start
+.\scripts\memory.ps1 status
+.\codex-headroom.cmd
+```
+
+This installs project-local Node, Bun, uv (if missing), Python, Graphify and Headroom, plus the Claude Mem worker. The versions of the Python tools and memory package are pinned. It does not authenticate accounts or install automatic recording hooks. MCP configuration for Claude Mem is already in KMAHackathonProject; other target projects must register `scripts/memory.ps1 -Action mcp` in their Codex configuration. A healthy worker proves service readiness only. Codex-backed recording remains unverified after a Windows sandbox refusal. Task Observer automatic activation remains unavailable because this snapshot lacks its scripts.
+
+Headroom's wrapper can modify the active Codex configuration and change request routing. Its CLI is verified; live compression, subscription routing and quota savings have not been verified here. Pass Codex arguments after `--`. The plain `codex` command remains available.
 
 These commands pin the top level versions captured with this bundle. Dependencies and upstream installers can still change: this is a reproducible skill snapshot, not a fully locked runtime environment. See upstream documentation for operating system requirements and removal instructions.
 

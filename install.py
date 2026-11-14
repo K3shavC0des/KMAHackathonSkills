@@ -16,7 +16,10 @@ def digest(path):
     h = hashlib.sha256()
     for f in sorted(p for p in path.rglob("*") if p.is_file()):
         h.update(f.relative_to(path).as_posix().encode())
-        h.update(f.read_bytes())
+        data = f.read_bytes()
+        if f.suffix in {'.toml', '.md', '.ps1', '.cmd', '.mjs', '.yaml', '.txt'}:
+            data = data.replace(b'\r\n', b'\n')
+        h.update(data)
     return h.hexdigest()
 
 def main():
@@ -82,7 +85,29 @@ def main():
         print(f"Installed Codex agents -> {agents_target}")
     else:
         print(f"Would install Codex agents -> {agents_target}")
-    if args.check and not failures: print(f"Verified {len(SKILLS)} skills in {target}")
+    runtime_source = ROOT / 'runtime'
+    if runtime_source.is_dir():
+        for src in sorted(runtime_source.rglob('*')):
+            if not src.is_file():
+                continue
+            dst = args.project.resolve() / src.relative_to(runtime_source)
+            if dst.is_symlink():
+                failures.append(f'Refusing symbolic link: {dst}')
+                continue
+            matches = dst.is_file() and src.read_bytes().replace(b'\r\n', b'\n') == dst.read_bytes().replace(b'\r\n', b'\n')
+            if matches:
+                continue
+            if args.check:
+                failures.append(f'Missing or changed: {dst}')
+            elif dst.exists() and not args.force:
+                failures.append(f'Existing edits preserved: {dst}; use --force to replace')
+            elif args.dry_run:
+                print(f'Would install runtime helper -> {dst}')
+            else:
+                dst.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copyfile(src, dst)
+                print(f'Installed runtime helper -> {dst}')
+    if args.check and not failures: print(f"Verified {len(SKILLS)} skills, agents and runtime helpers in {args.project.resolve()}")
     for error in failures: print(error)
     if not failures and not args.skills_only:
         setup_ecc(ROOT, lock, args)
