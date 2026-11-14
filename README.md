@@ -4,6 +4,21 @@ A shared toolkit for building a hackathon entry with Codex: a hackathon coordina
 
 **Start here:** run the installer for your hackathon app repository, restart Codex, and use `$hackathon-autopilot`. Setup copies the project skills and installs ECC through its native Codex plugin interface. The other external tools have separate runtime setup described below.
 
+## Why use this with Codex?
+
+A prompt tells Codex what you want built. This toolkit gives the whole team a reusable workflow for planning, testing, and handing off work. Separate Codex sessions share task ownership, decisions, and test results through the app repository, so teammates can resume work without copying chat history or repeating instructions.
+
+For example, a frontend agent can ask the backend owner for the API response format on the shared Git board. The backend agent can reply with the agreed fields and a PR link. Both teammates keep working in their own checkouts or worktrees, and the integration lead can use the same information when merging. Agents check the board during their work. Jira is optional.
+
+Graphify can help Codex query a code map, and Headroom can compress large logs before they reach the model. These features require the runtime setup below. For a quick solo task, a regular prompt is often enough.
+
+## Quick start
+
+1. Clone this toolkit and open a terminal in its folder.
+2. Run `python install.py --project "PATH_TO_YOUR_HACKATHON_APP"`, then rerun it with `--check` to verify setup. See [teammate installation](#teammate-installation) for prerequisites.
+3. Open the **app repository** in Codex. Have the integration lead run `$hackathon-autopilot` with the challenge, deadline, and team handles.
+4. Each teammate starts `$hackathon-autopilot` in teammate mode from a separate checkout or worktree, reads their assignment, then hands off the PR link and test results. See [the lead and teammate prompts](#start-a-hackathon-session).
+
 ## What is included
 
 | Component | What it does | What is bundled |
