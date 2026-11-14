@@ -173,7 +173,7 @@ These commands pin the top level versions captured with this bundle. Dependencie
 | Tool | Runtime installation | Next step |
 | --- | --- | --- |
 | Graphify | `uv tool install graphifyy==0.9.108` | The bundled Codex skill is already copied. Select `$graphify` and ask it to map the project. Upstream also offers `graphify install --project --platform codex`. |
-| Headroom | `uv tool install --python 3.13 "headroom-ai[all]==0.44.0"` | Run `headroom wrap codex` in the app repository for a wrapped session. `$headroom` is the separate library integration skill. |
+| Headroom | `uv tool install --python 3.13 "headroom-ai[all]==0.44.0"` | From the app repository, run `.\codex-headroom.cmd` for a wrapped session. `$headroom` is the separate library integration skill. |
 | Claude-Mem | `npx --yes claude-mem@15.18.3 install --ide codex --setup browser` | Complete upstream's browser setup and memory provider selection. Restart Codex as instructed. `$mem-search` retrieves memories once the integration is available. |
 | Task Observer | No separate runtime | Select `$task-observer`. Follow its `references/environments.md` for a persistent observation folder and optional activation instruction in `AGENTS.md`. Its runnable shell examples require Bash. |
 
