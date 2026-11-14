@@ -19,12 +19,6 @@
       "skill_path": "plugin/skills/mem-search/SKILL.md"
     },
     {
-      "bundle": "omniroute",
-      "url": "https://github.com/cheaper-inference/OmniRoute.git",
-      "commit": "82f60e5ef66cb8f4fd92929a44c3679ef844f84a",
-      "skill_path": "skills/config-codex-cli/SKILL.md"
-    },
-    {
       "bundle": "task-observer",
       "url": "https://github.com/rebelytics/one-skill-to-rule-them-all.git",
       "commit": "d61bc31f7857948710a947673c0e373bef4ed3d0",
@@ -69,8 +63,6 @@
     "vendor/graphify/SKILL.md": "604adc4448a79b429e56c8e458adb368940c428ceefa72a108b4bcbfbe14aa7d",
     "vendor/headroom/LICENSE": "50b9e890f4afb0a500696cdb6cde3dae08468225a1699317d23e81a1e2703a46",
     "vendor/headroom/SKILL.md": "5713dbdaaa3a3b158f04eb0ccf65649cd668771d149e9e2d4eac9d64537d877f",
-    "vendor/omniroute/LICENSE": "ee15249b90d01049db993bc5eb9eaf24a80c1750dc265d01be9a114111893f35",
-    "vendor/omniroute/SKILL.md": "39170dd9206e7cf005de0e11717f966e64cd285581ece772c53f554ad3bb7992",
     "vendor/task-observer/LICENSE": "f84fd0e27a619fa5ad1e40665af6700b8c75fd46758b942abdd8f806bc2d0b91",
     "vendor/task-observer/references/ceilings.txt": "e1ce67c65a27cbaad7f4a5e67a0acb84733bd5c2551d082fa652b9cbe3ff27e1",
     "vendor/task-observer/references/environments.md": "7b46bfc733a63ab90bf571478df9d77d8d603329c53bba6974ee3dd8de285c70",

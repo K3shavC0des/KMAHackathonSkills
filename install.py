@@ -9,7 +9,7 @@ from pathlib import Path
 from ecc_setup import setup_ecc
 
 ROOT = Path(__file__).resolve().parent
-SKILLS = ("graphify", "headroom", "claude-mem", "omniroute", "task-observer", "claude-code-setup", "hackathon-autopilot")
+SKILLS = ("graphify", "headroom", "claude-mem", "task-observer", "claude-code-setup", "hackathon-autopilot")
 
 def digest(path):
     h = hashlib.sha256()

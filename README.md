@@ -106,7 +106,6 @@ The prompt sets up the shared project skills and ECC. The separate tool runtimes
 | **Graphify** | Builds knowledge graphs of code and documents to investigate architecture, relationships, and paths through a project. | Upstream's Codex specific skill and references. Graph generation requires the Graphify runtime. |
 | **Headroom** | Compresses large tool results, logs, and other LLM context. Its CLI can wrap Codex through a local proxy. | Upstream's library integration skill. Installing this skill alone does not wrap Codex. |
 | **Claude-Mem** | Records work across sessions and retrieves relevant memory. Its observer uses a configured AI provider. | Upstream's `mem-search` skill. Recording, the local worker, and Codex integration require its upstream installer. |
-| **OmniRoute** | Runs a local gateway that routes requests to configured model providers, with routing and fallback options. | Upstream's `config-codex-cli` skill. The gateway and provider connections require separate setup. |
 | **Task Observer** | Notices corrections and repeated workflows, records observations, and proposes improvements to skills for review. | The original skill and references. Read its environment instructions before choosing an observation folder or setting up automatic activation. |
 | **Claude Code Setup** | Inspects a project and recommends useful automations. | Anthropic's original read-only recommender and references. Its Claude commands require interpretation for Codex. |
 
@@ -161,10 +160,9 @@ These commands pin the top level versions captured with this bundle. Dependencie
 | Graphify | `uv tool install graphifyy==0.9.108` | The bundled Codex skill is already copied. Select `$graphify` and ask it to map the project. Upstream also offers `graphify install --project --platform codex`. |
 | Headroom | `uv tool install --python 3.13 "headroom-ai[all]==0.44.0"` | Run `headroom wrap codex` in the app repository for a wrapped session. `$headroom` is the separate library integration skill. |
 | Claude-Mem | `npx --yes claude-mem@15.18.3 install --ide codex --setup browser` | Complete upstream's browser setup and memory provider selection. Restart Codex as instructed. `$mem-search` retrieves memories once the integration is available. |
-| OmniRoute | `npm install -g omniroute@3.8.54` | Run `omniroute`, connect a provider in its local dashboard, then use `$config-codex-cli` or upstream's `omniroute setup-codex` flow. |
 | Task Observer | No separate runtime | Select `$task-observer`. Follow its `references/environments.md` for a persistent observation folder and optional activation instruction in `AGENTS.md`. Its runnable shell examples require Bash. |
 
-Claude-Mem can retain session information and consume additional provider tokens. OmniRoute sends requests to providers you connect. Headroom changes the request path while wrapping Codex. Inspect upstream setup before combining proxies. The skill installation check does not exercise live provider calls or memory recording.
+Claude-Mem can retain session information and consume additional provider tokens. Headroom changes the request path while wrapping Codex. The skill installation check does not exercise live provider calls or memory recording.
 
 ECC is already bundled and registered by the default installer. Its [included native setup guide](https://github.com/affaan-m/ECC/blob/d2ef2680594f9a17526a6e1a2e18b3d242c5d17b/.codex-plugin/README.md) explains hook runtime dependencies and cache recovery. Native registration does not run `npm ci`. If a hook reports a missing package, follow that guide for an explicit cache-local dependency install; rerun its cache checker against the actual active plugin directory. Autopilot uses workflows available in the host and records missing capabilities. Posting team board updates requires push access to the app repository.
 
