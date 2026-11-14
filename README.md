@@ -73,7 +73,6 @@ Request the host's filesystem permission when the destination requires it.
      .agents/skills/graphify
      .agents/skills/headroom
      .agents/skills/claude-mem
-     .agents/skills/omniroute
      .agents/skills/task-observer
      .agents/skills/claude-code-setup
    Confirm the pinned ECC plugin is enabled and its cache matches the bundled
@@ -88,7 +87,7 @@ Request the host's filesystem permission when the destination requires it.
    start a new session, review ECC's hook trust in /hooks, and use $configure-ecc.
    Keep the toolkit checkout available as ECC's local marketplace source.
    List the separate runtime setup still needed for Graphify, Headroom,
-   Claude-Mem, and OmniRoute from the README. Leave provider selection and
+   Claude-Mem from the README. Leave provider selection and
    account connections for the team's tool-setup decisions.
 
 Stop after setup and verification. Wait for our team to supply the challenge,
