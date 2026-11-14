@@ -39,10 +39,8 @@ function mutate(state) {
   const task = Object.hasOwn(state.tasks, request.task) ? state.tasks[request.task] : undefined;
   switch (request.action) {
     case 'init':
-      requireCondition(state.coordinator === actor, 'Board already belongs to another coordinator');
       break;
     case 'task': {
-      requireCondition(state.coordinator === actor, 'Only the coordinator assigns tasks');
       requireCondition(!task, 'Task already exists');
       requireCondition(/^[a-z0-9-]{1,64}$/.test(request.task), 'Use a lowercase task slug');
       requireCondition(Array.isArray(request.paths) && request.paths.length > 0, 'Supply owned paths');
@@ -54,22 +52,22 @@ function mutate(state) {
         }
       }
       state.tasks[request.task] = {
-        id: request.task, owner: text(request.owner, 'owner', 80),
+        id: request.task, owner: text(request.owner ?? actor, 'owner', 80),
         goal: text(request.goal, 'goal'), acceptance: text(request.acceptance, 'acceptance'),
         paths: request.paths, status: 'queued', evidence: '',
       };
       break;
     }
     case 'start':
+    case 'claim':
     case 'review':
     case 'done':
     case 'blocked': {
       requireCondition(task, 'Unknown task');
-      requireCondition(task.owner === actor || state.coordinator === actor, 'Task belongs to another owner');
-      const allowed = { start: ['queued', 'blocked'], review: ['working'], done: ['review'], blocked: ['queued', 'working', 'review'] };
+      const allowed = { start: ['queued', 'blocked'], claim: ['queued', 'blocked'], review: ['working'], done: ['review'], blocked: ['queued', 'working', 'review'] };
       requireCondition(allowed[request.action].includes(task.status), `Cannot ${request.action} from ${task.status}`);
-      if (request.action === 'done') requireCondition(state.coordinator === actor, 'Coordinator verifies integration');
-      task.status = { start: 'working', review: 'review', done: 'done', blocked: 'blocked' }[request.action];
+      if (request.action === 'start' || request.action === 'claim') task.owner = actor;
+      task.status = { start: 'working', claim: 'working', review: 'review', done: 'done', blocked: 'blocked' }[request.action];
       task.evidence = text(request.evidence, 'evidence');
       break;
     }
@@ -114,7 +112,7 @@ try {
         messages = messages.slice(index + 1);
       }
       const page = messages.slice(0, 20);
-      console.log(JSON.stringify({ coordinator: state.coordinator, tasks: state.tasks, messages: page,
+      console.log(JSON.stringify({ mode: 'peer', coordinator: state.coordinator, tasks: state.tasks, messages: page,
         cursor: page.at(-1)?.id || request.after || null, has_more: messages.length > 20 }));
       completed = true;
       break;

@@ -92,13 +92,13 @@ ECC is already bundled and registered by the default installer. Its [included na
 
 ## Start a hackathon session
 
-For the lead, paste this into Codex in the app repository:
+Any teammate can paste this into Codex in the app repository.
 
 ```text
 Use $hackathon-autopilot and ECC to build our hackathon entry.
 Challenge and rules: [link]
 Deadline and time zone: [date/time/zone]
-Team: [GitHub handles and integration lead]
+Team: [all GitHub handles, with everyone able to work across the project]
 Idea: [optional]
 Deployment target: [optional]
 Work through implementation, verified demo, and submission materials.
@@ -111,8 +111,10 @@ Each teammate uses their own checkout or worktree and Codex session:
 ```text
 Use $hackathon-autopilot in teammate mode. My team identity is [handle].
 Read my assigned task and inbox, work in an isolated task branch,
-then hand off the PR and test evidence to the integration lead.
+Create or claim tasks, coordinate active edits, and post PRs and test evidence.
 ```
+
+Everyone has the same workflow capabilities. Any teammate can create or assign tasks, claim queued work, update progress, integrate PRs, and verify the app. Responsibilities are chosen per task. Coordinate active edits with task ownership so shared files have one writer at a time. GitHub permissions still depend on each collaborator's repository access.
 
 The optional board records task ownership, inbox updates, and PR handoffs on a shared Git branch. Follow the [team guide](.agents/skills/hackathon-autopilot/references/team.md) for commands and the [usage guide](.agents/skills/hackathon-autopilot/references/usage.md) for operating defaults.
 
