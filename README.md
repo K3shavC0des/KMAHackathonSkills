@@ -14,10 +14,88 @@ Graphify can help Codex query a code map, and Headroom can compress large logs b
 
 ## Quick start
 
-1. Clone this toolkit and open a terminal in its folder.
-2. Run `python install.py --project "PATH_TO_YOUR_HACKATHON_APP"`, then rerun it with `--check` to verify setup. See [teammate installation](#teammate-installation) for prerequisites.
-3. Open the **app repository** in Codex. Any teammate can run `$hackathon-autopilot` with the challenge, deadline, and all team handles and initialize the board.
-4. Each teammate starts `$hackathon-autopilot` from a separate checkout or worktree, creates or claims a task, then posts the PR link and test results. Anyone can integrate and verify work. See [the team prompts](#start-a-hackathon-session).
+Each teammate can paste this entire prompt into their own Codex chat to set up their computer. The shared project is private, so Keshav must first grant each teammate GitHub collaborator access and they must accept the invitation. Codex may need their help with sign-in, installation approvals, or opening the final project folder.
+
+```text
+Set up my computer for our shared KMA hackathon project. Carry out the setup
+through verification and resolve recoverable installation errors.
+
+Download these two repositories into separate local Desktop folders:
+  Toolkit: https://github.com/K3shavC0des/KMAHackathonSkills.git
+  Project: https://github.com/K3shavC0des/KMAHackathonProject.git
+
+Use folders named KMAHackathonSkills and KMAHackathonProject under MY account.
+Detect my operating system, username, shell, and actual local paths. Use a
+Desktop location outside OneDrive and the ChatGPT application folders. If my
+Desktop is redirected to cloud storage, ask me to choose a local destination.
+Request the host's filesystem permission when the destination requires it.
+
+1. Check Git and GitHub authentication, then clone both repositories. The
+   project is private. If access fails, tell me whether I need to sign in or
+   accept a collaborator invitation. Use the service's normal sign-in flow.
+   Keep credentials out of chat, repository files, and command output.
+   If a destination already exists, inspect its origin and working tree.
+   Reuse the matching checkout, preserve existing work, and update a clean
+   checkout with git pull --ff-only. Resolve a conflicting destination with me.
+   An empty project repository is expected before the team starts development.
+
+2. Read the downloaded toolkit's README.md, UPSTREAM.md, install.py, and
+   ecc_setup.py. Check the prerequisites and install missing prerequisites
+   from their official source or a reputable package manager as permitted by
+   this host. We need Git, Python 3.10+, Node.js 22+ for hooks and the team
+   board, and a Codex CLI with native plugin support. Follow any required
+   installation approvals and surface any sign-in step I must complete.
+
+   If Python is unavailable but uv is installed, use this runner:
+     uv run --python 3.12 python
+   Otherwise check an actual Python interpreter such as py or python3.
+   Verify that the interpreter runs before using it for installation.
+
+   Locate the Codex CLI on my machine. Check PATH first, then the installed
+   app or app-server executable paths for my operating system and account.
+   Use its actual executable path with --codex if needed. Verify its version
+   and plugin commands. Use the toolkit's documented compatibility requirements.
+
+3. From the toolkit checkout, run its default installer for the absolute path
+   of MY KMAHackathonProject checkout. For a working Python command, the flow is:
+     python install.py --project "PROJECT_PATH" --codex "CODEX_EXECUTABLE"
+     python install.py --project "PROJECT_PATH" --codex "CODEX_EXECUTABLE" --check
+   Substitute real absolute paths and the Python runner established above.
+   Quote paths for the detected shell. Check each exit status and fix failures
+   before continuing. Use the default setup so it registers the bundled native
+   ECC plugin and copies the seven project skills. Preserve edited installed
+   skills and inspect differences before choosing an update. If an existing ECC
+   marketplace points elsewhere, inspect it and explain any necessary source
+   replacement before asking me to approve changes to that existing setup.
+
+4. Confirm the project contains these installed skill folders:
+     .agents/skills/hackathon-autopilot
+     .agents/skills/graphify
+     .agents/skills/headroom
+     .agents/skills/claude-mem
+     .agents/skills/omniroute
+     .agents/skills/task-observer
+     .agents/skills/claude-code-setup
+   Confirm the pinned ECC plugin is enabled and its cache matches the bundled
+   source using the installer's --check. Report actual results for each part.
+   Read the team coordination guide inside hackathon-autopilot. Everyone can
+   plan, build any part, assign or claim tasks, review, integrate, and verify.
+   Temporary task ownership coordinates active file edits. Each teammate uses
+   their own checkout, GitHub account, Codex session, and task branches.
+
+5. Finish with my absolute project and toolkit paths, setup/check results,
+   and the exact next steps to open KMAHackathonProject in Codex, restart or
+   start a new session, review ECC's hook trust in /hooks, and use $configure-ecc.
+   Keep the toolkit checkout available as ECC's local marketplace source.
+   List the separate runtime setup still needed for Graphify, Headroom,
+   Claude-Mem, and OmniRoute from the README. Leave provider selection and
+   account connections for the team's tool-setup decisions.
+
+Stop after setup and verification. Wait for our team to supply the challenge,
+deadline, and agreed idea before planning or building the hackathon entry.
+```
+
+The prompt sets up the shared project skills and ECC. The separate tool runtimes and account connections are covered under [runtime installation](#install-the-original-tool-runtimes). The team can start working together using [these prompts](#start-a-hackathon-session) when ready.
 
 ## What is included
 
