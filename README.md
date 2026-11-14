@@ -112,6 +112,22 @@ These are upstream skill snapshots, with their licenses retained. No replacement
 
 ## Teammate installation
 
+### Recommended Windows order
+
+Get the skills toolkit first, then the hackathon project. Run the installer from the toolkit against the project:
+
+```powershell
+cd $env:USERPROFILE\Desktop
+git clone https://github.com/K3shavC0des/KMAHackathonSkills.git
+git clone https://github.com/K3shavC0des/KMAHackathonProject.git
+cd KMAHackathonSkills
+python install.py --project "..\KMAHackathonProject"
+python install.py --project "..\KMAHackathonProject" --check
+cd ..\KMAHackathonProject
+```
+
+Open `KMAHackathonProject` in Codex and restart Codex after installation. OmniRoute is intentionally excluded; do not install or configure it.
+
 You need Git, Python 3.10 or newer, and the **Codex CLI with native plugin support** (ECC documents Codex 0.146.0 or newer; this setup was checked with 0.169.0). Node.js is needed to run ECC's hook commands; Node.js 22+ also supports the optional team board. On Windows, use `py` if that is your Python command; on macOS/Linux, use `python3` when needed.
 
 ```sh
